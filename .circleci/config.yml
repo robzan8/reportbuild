@@ -1,4 +1,4 @@
-var_1: &docker_image "devgnucoop/ngcontainer:latest"
+var_1: &docker_image devgnucoop/ngcontainer:1.2
 var_2: &cache_key ajf-reportbuild-{{ checksum "package-lock.json" }}-ngcontainer
 
 var_3: &job_defaults
@@ -23,7 +23,7 @@ var_6: &save_cache
       - "node_modules"
 
 var_7: &npm_install
-  run: npm install --dry-run
+  run: npm install
 
 version: 2
 
@@ -38,3 +38,51 @@ jobs:
       - *save_cache
 
       - run: npm run lint
+
+  unit_tests:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *restore_cache
+      - *npm_install
+      - *save_cache
+
+      - run: npm run ci:test
+
+  integration_tests:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *restore_cache
+      - *npm_install
+      - *save_cache
+
+      - run: npm run ci:e2e
+
+  deploy_prod_build:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *restore_cache
+      - *npm_install
+
+      - run: npm run ci:build
+      - run: echo "$DEPLOY_SSH_KEY" | base64 -d >> ~/.ssh/deploy.key
+      - run: chmod 600 ~/.ssh/deploy.key
+      - run: echo "$DEPLOY_HOST_SSH"| base64 -d >> ~/.ssh/known_hosts
+      - run: chmod 644 ~/.ssh/known_hosts
+      - run: tar cfj - -C dist/reportbuild . | ssh -i ~/.ssh/deploy.key gnucoopajfreportbuilder@ajf.rocks "tar xfj - -C ../../web"
+
+workflows:
+  version: 2
+
+  deploy_prod_build:
+    jobs:
+      - lint
+      - unit_tests
+      - integration_tests
+      - deploy_prod_build:
+          requires:
+            - lint
+            - unit_tests
+            - integration_tests

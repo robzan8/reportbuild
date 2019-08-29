@@ -5,10 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "ci:build": "ng build --prod",
     "test": "ng test",
-    "ci:test": "ng test --browsers=ChromeHeadless --single-run=true --watch=false",
+    "ci:test": "ng test --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ci:e2e": "ng e2e --protractor-config=e2e/protractor.ci.conf.js"
   },
   "repository": {
     "type": "git",
