@@ -1,5 +1,5 @@
 import { AjfReport } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, HostListener } from '@angular/core';
 
 import { WidgetComponent } from '../widgets/widget/widget.component';
 
@@ -34,6 +34,13 @@ export class ReportBuilderComponent {
     content: {content: [], styles: {}},
     footer: {content: [], styles: {}},
   };
+
+  @HostListener('document:keyup.delete', ['$event']) onDelete(event: KeyboardEvent) {
+    if (!this.selectedComponent) {
+      return;
+    }
+    this.selectedComponent.remove();
+  }
 
   constructor(private cdr: ChangeDetectorRef) { }
 

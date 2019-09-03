@@ -30,6 +30,15 @@ export class WidgetComponent {
     this.builder.selectedComponent = this;
   }
 
+  remove() {
+    try {
+      const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
+      const i = parentContent.indexOf(this.widget);
+      parentContent.splice(i, 1);
+      this.parent.markForCheck();
+    } catch(_) {}
+  }
+
   markForCheck(): void {
     this.cdr.markForCheck();
   }
