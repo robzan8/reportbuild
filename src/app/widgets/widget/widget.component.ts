@@ -12,26 +12,9 @@ import { ReportBuilderComponent } from '../../report-builder/report-builder.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WidgetComponent {
-  private pName: string;
-  get name(): string { return this.pName; }
-  @Input() set name(name: string) {
-    this.pName = name;
-    this.cdr.markForCheck();
-  }
-
-  private pWidget: AjfWidget;
-  get widget(): AjfWidget { return this.pWidget; }
-  @Input() set widget(widget: AjfWidget) {
-    this.pWidget = widget;
-    this.cdr.markForCheck();
-  }
-
-  private pParent: AjfWidgetWithContent;
-  get parent(): AjfWidgetWithContent { return this.pParent; }
-  @Input() set parent(parent: AjfWidgetWithContent) {
-    this.pParent = parent;
-    this.cdr.markForCheck();
-  }
+  @Input() name: string;
+  @Input() widget: AjfWidget;
+  @Input() parent: WidgetComponent;
 
   constructor(public builder: ReportBuilderComponent, protected cdr: ChangeDetectorRef) { }
 

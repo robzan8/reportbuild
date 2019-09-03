@@ -31,7 +31,7 @@ export class ContainerComponent extends WidgetComponent {
   }
 
   columnIndex(): number {
-    const layout = this.parent as AjfLayoutWidget;
+    const layout = this.parent.widget as AjfLayoutWidget;
     if (!layout) {
       throw new Error('columnIndex called on widget that is not a child of layout.');
     }
@@ -39,7 +39,7 @@ export class ContainerComponent extends WidgetComponent {
   }
 
   columnWidth(): number {
-    return (this.parent as AjfLayoutWidget).columns[this.columnIndex()];
+    return (this.parent.widget as AjfLayoutWidget).columns[this.columnIndex()];
   }
 
   onColumnWidthChange(event: Event) {
@@ -51,7 +51,7 @@ export class ContainerComponent extends WidgetComponent {
     if (isNaN(width)) {
       width = -1;
     }
-    (this.parent as AjfLayoutWidget).columns[this.columnIndex()] = width;
+    (this.parent.widget as AjfLayoutWidget).columns[this.columnIndex()] = width;
   }
 
   addWidgetClicked(event: Event) {

@@ -13,7 +13,7 @@
     </div>
     dataset:<br>
     <app-chart-data *ngFor="let data of chart.dataset"
-      name="data" [widget]="data" [parent]="chart"></app-chart-data>
+      name="data" [widget]="data" [parent]="this"></app-chart-data>
 
     <div class="add-widget-button">
       <a class="add-data-button" (click)="addData()">add data</a>

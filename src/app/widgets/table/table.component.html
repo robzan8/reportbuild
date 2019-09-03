@@ -4,7 +4,7 @@
   <table class="table-content">
     <tr *ngFor="let row of table.dataset; let i = index">
       <td *ngFor="let cell of row" [attr.colspan]="cell.colspan || 1" [attr.rowspan]="cell.rowspan || 1">
-        <app-table-cell name="cell" [widget]="cell" [parent]="table"></app-table-cell>
+        <app-table-cell name="cell" [widget]="cell" [parent]="this"></app-table-cell>
       </td>
 
       <td *ngIf="i === 0" [attr.rowspan]="numRows()" style="width: 60px">
