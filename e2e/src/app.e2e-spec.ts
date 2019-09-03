@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should have a report builder component', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to reportbuild!');
+    expect(page.getTitleText()).toEqual('app-report-builder');
   });
 
   afterEach(async () => {

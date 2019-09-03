@@ -26,7 +26,7 @@ export class StylesEditorComponent {
     this.cdr.markForCheck();
   }
 
-  get styles() { return this.widget[this.stylesName] }
+  get styles() { return this.widget[this.stylesName]; }
   set styles(s: any) {
     this.widget[this.stylesName] = s;
     this.cdr.markForCheck();

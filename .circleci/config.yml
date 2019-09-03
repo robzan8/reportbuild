@@ -1,0 +1,88 @@
+var_1: &docker_image devgnucoop/ngcontainer:1.2
+var_2: &cache_key ajf-reportbuild-{{ checksum "package-lock.json" }}-ngcontainer
+
+var_3: &job_defaults
+  working_directory: ~/project
+  docker:
+    - image: *docker_image
+
+var_4: &checkout_code
+  checkout:
+    # After checkout, rebase on top of master. By default, PRs are not rebased on top of master,
+    # which we want. See https://discuss.circleci.com/t/1662
+    post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
+
+var_5: &restore_cache
+  restore_cache:
+    key: *cache_key
+
+var_6: &save_cache
+  save_cache:
+    key: *cache_key
+    paths:
+      - "node_modules"
+
+var_7: &npm_install
+  run: npm install
+
+version: 2
+
+jobs:
+
+  lint:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *restore_cache
+      - *npm_install
+      - *save_cache
+
+      - run: npm run lint
+
+  unit_tests:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *restore_cache
+      - *npm_install
+      - *save_cache
+
+      - run: npm run ci:test
+
+  integration_tests:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *restore_cache
+      - *npm_install
+      - *save_cache
+
+      - run: npm run ci:e2e
+
+  deploy_prod_build:
+    <<: *job_defaults
+    steps:
+      - *checkout_code
+      - *restore_cache
+      - *npm_install
+
+      - run: npm run ci:build
+      - run: echo "$DEPLOY_SSH_KEY" | base64 -d >> ~/.ssh/deploy.key
+      - run: chmod 600 ~/.ssh/deploy.key
+      - run: echo "$DEPLOY_HOST_SSH"| base64 -d >> ~/.ssh/known_hosts
+      - run: chmod 644 ~/.ssh/known_hosts
+      - run: tar cfj - -C dist/reportbuild . | ssh -i ~/.ssh/deploy.key gnucoopajfreportbuilder@ajf.rocks "tar xfj - -C ../../web"
+
+workflows:
+  version: 2
+
+  deploy_prod_build:
+    jobs:
+      - lint
+      - unit_tests
+      - integration_tests
+      - deploy_prod_build:
+          requires:
+            - lint
+            - unit_tests
+            - integration_tests

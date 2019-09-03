@@ -30,7 +30,7 @@ export class ObjectEditorComponent implements OnDestroy {
     this.cdr.markForCheck();
   }
 
-  get object() { return this.widget[this.objectName] }
+  get object() { return this.widget[this.objectName]; }
   set object(o: any) {
     this.widget[this.objectName] = o;
     this.cdr.markForCheck();
