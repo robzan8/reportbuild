@@ -36,6 +36,7 @@ export class ReportBuilderComponent {
   };
 
   @HostListener('document:keyup.delete', ['$event']) onDelete(event: KeyboardEvent) {
+    console.log(event);
     return;
     // temporarily disabled. We don't want the widget to be removed each time del is
     // pressed inside an input or textarea.

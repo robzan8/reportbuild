@@ -36,7 +36,7 @@ export class WidgetComponent {
       const i = parentContent.indexOf(this.widget);
       parentContent.splice(i, 1);
       this.parent.markForCheck();
-    } catch(_) {}
+    } catch(_) { }
   }
 
   markForCheck(): void {
