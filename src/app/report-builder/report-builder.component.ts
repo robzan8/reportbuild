@@ -36,7 +36,8 @@ export class ReportBuilderComponent {
   };
 
   @HostListener('body:keyup.delete', ['$event']) onDelete(event: KeyboardEvent) {
-    if (!this.selectedComponent || (event.target as HTMLElement).tagName !== 'BODY') {
+    const tag = (event.target as HTMLElement).tagName;
+    if (!this.selectedComponent || tag !== 'BODY') {
       return;
     }
     this.selectedComponent.remove();

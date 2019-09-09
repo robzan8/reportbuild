@@ -23,20 +23,48 @@ export class WidgetComponent {
     event.stopPropagation();
     this.builder.selectedComponent = this;
   }
-
   @HostListener('focusin', ['$event'])
   onFocusIn(event: Event) {
     event.stopPropagation();
     this.builder.selectedComponent = this;
   }
 
-  remove() {
+  @HostListener('copy', ['$event'])
+  onCopy(event: ClipboardEvent) {
+    event.stopPropagation();
+    const tag = (event.target as HTMLElement).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') {
+      return;
+    }
+    event.clipboardData.setData('text/plain', JSON.stringify(this.widget));
+    event.preventDefault();
+  }
+  @HostListener('cut', ['$event'])
+  onCut(event: ClipboardEvent) {
+    event.stopPropagation();
+    const tag = (event.target as HTMLElement).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') {
+      return;
+    }
+    const text = JSON.stringify(this.widget);
+    const ok = this.remove();
+    if (!ok) {
+      return;
+    }
+    event.clipboardData.setData('text/plain', text);
+    event.preventDefault();
+  }
+
+  remove(): boolean {
     try {
       const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
       const i = parentContent.indexOf(this.widget);
       parentContent.splice(i, 1);
       this.parent.markForCheck();
-    } catch(_) { }
+      return true;
+    } catch(_) {
+      return false;
+    }
   }
 
   markForCheck(): void {
