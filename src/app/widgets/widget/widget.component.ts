@@ -55,6 +55,21 @@ export class WidgetComponent {
     event.preventDefault();
   }
 
+  @HostListener('paste', ['$event'])
+  onPaste(event: ClipboardEvent) {
+    event.stopPropagation();
+    const tag = (event.target as HTMLElement).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') {
+      return;
+    }
+    event.preventDefault();
+    const w = JSON.parse(event.clipboardData.getData('text/plain'));
+    
+    const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
+    const i = parentContent.indexOf(this.widget);
+    parentContent.splice(i+1, 0, w);
+    this.parent.markForCheck();
+  }
   remove(): boolean {
     try {
       const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
