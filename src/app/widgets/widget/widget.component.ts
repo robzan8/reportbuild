@@ -64,10 +64,10 @@ export class WidgetComponent {
     }
     event.preventDefault();
     const w = JSON.parse(event.clipboardData.getData('text/plain'));
-    
+
     const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
     const i = parentContent.indexOf(this.widget);
-    parentContent.splice(i+1, 0, w);
+    parentContent.splice(i + 1, 0, w);
     this.parent.markForCheck();
   }
   remove(): boolean {
@@ -77,7 +77,7 @@ export class WidgetComponent {
       parentContent.splice(i, 1);
       this.parent.markForCheck();
       return true;
-    } catch(_) {
+    } catch (_) {
       return false;
     }
   }
