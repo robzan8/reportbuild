@@ -3,6 +3,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, HostListe
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 
+// TODO: editor width should adapt to report
+// TODO: implement undo redo
+// TODO: allow chartType as type
+// TODO: automatically add columns in layout if children are not columns?
+// fix aggregation
+
 // Base class for widgets.
 @Component({
   selector: 'app-widget',
@@ -18,11 +24,6 @@ export class WidgetComponent {
 
   constructor(public builder: ReportBuilderComponent, protected cdr: ChangeDetectorRef) { }
 
-  @HostListener('click', ['$event']) // TODO: widgets should be focusable
-  onClick(event: Event) {
-    event.stopPropagation();
-    this.builder.selectedComponent = this;
-  }
   @HostListener('focusin', ['$event'])
   onFocusIn(event: Event) {
     event.stopPropagation();

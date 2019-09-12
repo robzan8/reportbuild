@@ -1,13 +1,10 @@
-<div class="report-title"
-[ngClass]="{'report-title-selected': builder.selectedComponent === this}">
-  report
-</div>
+<div class="report-title" tabindex="0">report</div>
 
 <div class="content">
-  <app-container name="header" [widget]="report.header" [widgetSet]="[0,2,3,9]">
+  <app-container name="header" [widget]="report.header" [widgetSet]="[0,2,3,9]" tabindex="0">
   </app-container>
-  <app-container name="content" [widget]="report.content" [widgetSet]="[0,1,2,3,4,5,6,9]">
+  <app-container name="content" [widget]="report.content" [widgetSet]="[0,1,2,3,4,5,6,9]" tabindex="0">
   </app-container>
-  <app-container name="footer" [widget]="report.footer" [widgetSet]="[0,2,3,9]">
+  <app-container name="footer" [widget]="report.footer" [widgetSet]="[0,2,3,9]" tabindex="0">
   </app-container>
 </div>

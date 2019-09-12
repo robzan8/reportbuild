@@ -1,5 +1,4 @@
-<div [ngClass]="{widget: true, 'widget-selected': builder.selectedComponent === this}">
-
+<div class="widget">
   <span>{{ name }}
     <ng-container *ngIf="widget.widgetType === WT.Column">
       - width: <input class="column-width-input" type="text" [value]="columnWidth()"
@@ -11,33 +10,33 @@
     <ng-container *ngFor="let child of container.content">
       <ng-container [ngSwitch]="child.widgetType">
         <app-container *ngSwitchCase="WT.Layout" name="layout"
-          [widget]="child" [parent]="this" [widgetSet]="[7]">
+          [widget]="child" [parent]="this" [widgetSet]="[7]" tabindex="0">
         </app-container>
 
         <app-page-break *ngSwitchCase="WT.PageBreak" name="page break"
-          [widget]="child" [parent]="this"></app-page-break>
+          [widget]="child" [parent]="this" tabindex="0"></app-page-break>
 
         <app-image *ngSwitchCase="WT.Image" name="image"
-          [widget]="child" [parent]="this"></app-image>
+          [widget]="child" [parent]="this" tabindex="0"></app-image>
 
         <app-text *ngSwitchCase="WT.Text" name="text"
-          [widget]="child" [parent]="this"></app-text>
+          [widget]="child" [parent]="this" tabindex="0"></app-text>
 
         <app-chart *ngSwitchCase="WT.Chart" name="chart"
-          [widget]="child" [parent]="this"></app-chart>
+          [widget]="child" [parent]="this" tabindex="0"></app-chart>
 
         <app-table *ngSwitchCase="WT.Table" name="table"
-          [widget]="child" [parent]="this"></app-table>
+          [widget]="child" [parent]="this" tabindex="0"></app-table>
 
         <app-map *ngSwitchCase="WT.Map" name="map"
-          [widget]="child" [parent]="this"></app-map>
+          [widget]="child" [parent]="this" tabindex="0"></app-map>
 
         <app-container *ngSwitchCase="WT.Column" name="column"
-          [widget]="child" [parent]="this" [widgetSet]="[0,2,3,4,5,6,9]">
+          [widget]="child" [parent]="this" [widgetSet]="[0,2,3,4,5,6,9]" tabindex="0">
         </app-container>
 
         <app-image-container *ngSwitchCase="WT.ImageContainer" name="image container"
-          [widget]="child" [parent]="this"></app-image-container>
+          [widget]="child" [parent]="this" tabindex="0"></app-image-container>
       </ng-container>
     </ng-container>
 

@@ -1,4 +1,4 @@
-<div [ngClass]="{widget: true, 'widget-selected': builder.selectedComponent === this}">
+<div class="widget">
   <span>chart - type:
     <select (change)="onChartTypeChange($event)">
       <option *ngFor="let name of chartTypes; let i = index"

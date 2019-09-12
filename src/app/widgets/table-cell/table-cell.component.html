@@ -1,4 +1,4 @@
-<div [ngClass]="{'table-cell': true, 'table-cell-selected': builder.selectedComponent === this}">
+<div class="table-cell">
   <input type="text" placeholder="cell label"
     [value]="cell.label || ''" (change)="onLabelChange($event)">
 </div>

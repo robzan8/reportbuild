@@ -1,4 +1,4 @@
-<div [ngClass]="{widget: true, 'widget-selected': builder.selectedComponent === this}">
+<div class="widget">
   <span>image - type:
     <select (change)="onImageTypeChange($event)">
       <option value="0" [selected]="image.imageType === 0 ? 'selected' : ''">Image</option>

@@ -6,12 +6,8 @@ app-chart-data {
 .chart-data {
     width: 100%;
     display: flex;
-    border: 2px solid #abf;
+    border: 2px solid #aeb;
     border-radius: 2px;
-}
-
-.chart-data-selected {
-    border-color: #aeb;
 }
 
 .chart-data input, .chart-data select {

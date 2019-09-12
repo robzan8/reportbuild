@@ -70,7 +70,7 @@ select {
 	width: 100%;
 	min-width: 150px;
 	border-radius: 4px;
-	border: 3px solid #abf;
+	border: 3px solid #aeb;
 	border-top: none;
 }
 
@@ -78,14 +78,7 @@ select {
 	display: block;
 	padding: 0 3px;
 	padding-bottom: 1px;
-	background-color: #abf;
-}
-
-.widget-selected {
-	border-color: #aeb;
-	> span {
-		background-color: #aeb;
-	}
+	background-color: #aeb;
 }
 
 .a-button {
