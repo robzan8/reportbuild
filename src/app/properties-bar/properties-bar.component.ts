@@ -12,12 +12,13 @@ import { WidgetComponent } from '../widgets/widget/widget.component';
 })
 export class PropertiesBarComponent {
 
-  objectName = 'options';
-
-  private pComponent: WidgetComponent;
-  get component(): WidgetComponent { return this.pComponent; }
-  @Input() set component(component: WidgetComponent) {
-    this.pComponent = component;
+  @Input() component: WidgetComponent;
+  private pObjectName = 'options';
+  get objectName(): string {
+    return this.pObjectName;
+  }
+  set objectName(n: string) {
+    this.pObjectName = n;
     this.cdr.markForCheck();
   }
 

@@ -48,37 +48,37 @@ export class ImageComponent extends WidgetComponent {
     }
   }
 
-  onImageTypeChange(event: Event) {
-    const formula = this.getFormula();
-
-    const select = event.target as HTMLSelectElement;
-    this.image.imageType = Number(select.value);
-
-    this._setFormula(formula);
-    this.cdr.markForCheck();
-  }
-
-  onFormulaChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this._setFormula(input.value);
-  }
-
-  private _setFormula(formula: string) {
+  setFormula(formula: string) {
     delete this.image.url;
     delete this.image.flag;
     delete this.image.icon;
     switch (this.image.imageType) {
       case AjfImageType.Image:
         this.image.url = {formula};
-        return;
+        break;
       case AjfImageType.Flag:
         this.image.flag = {formula};
-        return;
+        break;
       case AjfImageType.Icon:
         this.image.icon = {formula};
-        return;
+        break;
       default:
         throw new Error('unknown image type');
     }
+    this.cdr.markForCheck();
+  }
+
+  onImageTypeChange(event: Event) {
+    const formula = this.getFormula();
+
+    const select = event.target as HTMLSelectElement;
+    this.image.imageType = Number(select.value);
+
+    this.setFormula(formula);
+  }
+
+  onFormulaChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.setFormula(input.value);
   }
 }

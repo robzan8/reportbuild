@@ -32,9 +32,6 @@ export class ContainerComponent extends WidgetComponent {
 
   columnIndex(): number {
     const layout = this.parent.widget as AjfLayoutWidget;
-    if (!layout) {
-      throw new Error('columnIndex called on widget that is not a child of layout.');
-    }
     return layout.content.indexOf(this.widget);
   }
 
@@ -52,6 +49,7 @@ export class ContainerComponent extends WidgetComponent {
       width = -1;
     }
     (this.parent.widget as AjfLayoutWidget).columns[this.columnIndex()] = width;
+    this.cdr.markForCheck();
   }
 
   addWidgetClicked(event: Event) {
@@ -60,9 +58,8 @@ export class ContainerComponent extends WidgetComponent {
     if (wt < 0) {
       return;
     }
-    this.addWidget(wt);
     select.value = '-1';
-    this.cdr.markForCheck();
+    this.addWidget(wt);
   }
 
   addWidget(wt: AjfWidgetType) {

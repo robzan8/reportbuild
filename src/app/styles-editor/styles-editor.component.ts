@@ -12,21 +12,12 @@ export class StylesEditorComponent {
 
   @ViewChild('stylesForm', {static: true}) stylesForm: ElementRef;
 
-  private pWidget: AjfWidget;
-  get widget(): AjfWidget { return this.pWidget; }
-  @Input() set widget(widget: AjfWidget) {
-    this.pWidget = widget;
-    this.cdr.markForCheck();
-  }
+  @Input() widget: AjfWidget;
+  @Input() stylesName: string;
 
-  private pStylesName: string;
-  get stylesName(): string { return this.pStylesName; }
-  @Input() set stylesName(stylesName: string) {
-    this.pStylesName = stylesName;
-    this.cdr.markForCheck();
+  get styles() {
+    return this.widget[this.stylesName];
   }
-
-  get styles() { return this.widget[this.stylesName]; }
   set styles(s: any) {
     this.widget[this.stylesName] = s;
     this.cdr.markForCheck();
@@ -61,7 +52,6 @@ export class StylesEditorComponent {
         return;
       }
       (children[children.length - 3] as HTMLInputElement).focus();
-      this.cdr.markForCheck();
     }, 100);
   }
 

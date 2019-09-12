@@ -11,16 +11,7 @@ import { WidgetComponent } from '../widgets/widget/widget.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportBuilderComponent {
-  private pSelectedComponent: WidgetComponent;
-  get selectedComponent(): WidgetComponent { return this.pSelectedComponent; }
-  set selectedComponent(selectedComponent: WidgetComponent) {
-    const oldSelected = this.pSelectedComponent;
-    this.pSelectedComponent = selectedComponent;
-    this.cdr.markForCheck();
-    if (oldSelected != null) {
-      oldSelected.markForCheck();
-    }
-  }
+  selectedComponent: WidgetComponent;
 
   private pShowOutput = false;
   get showOutput(): boolean { return this.pShowOutput; }

@@ -15,28 +15,26 @@ export class ObjectEditorComponent implements OnDestroy {
 
   keyUp = new Subject<KeyboardEvent>();
   private sub: Subscription;
+  private pJsonIsValid = true;
 
-  private pWidget: AjfWidget;
-  get widget(): AjfWidget { return this.pWidget; }
-  @Input() set widget(widget: AjfWidget) {
-    this.pWidget = widget;
-    this.cdr.markForCheck();
+  @Input() widget: AjfWidget;
+  @Input() objectName: string;
+
+  get object() {
+    return this.widget[this.objectName];
   }
-
-  private pObjectName: string;
-  get objectName(): string { return this.pObjectName; }
-  @Input() set objectName(objectName: string) {
-    this.pObjectName = objectName;
-    this.cdr.markForCheck();
-  }
-
-  get object() { return this.widget[this.objectName]; }
   set object(o: any) {
     this.widget[this.objectName] = o;
     this.cdr.markForCheck();
   }
 
-  jsonIsValid = true;
+  get jsonIsValid(): boolean {
+    return this.pJsonIsValid;
+  }
+  set jsonIsValid(v: boolean) {
+    this.pJsonIsValid = v;
+    this.cdr.markForCheck();
+  }
 
   constructor(private cdr: ChangeDetectorRef) {
     this.sub = this.keyUp.pipe(debounceTime(200)).subscribe(e => {
@@ -65,7 +63,6 @@ export class ObjectEditorComponent implements OnDestroy {
     }
     this.object = o;
     this.jsonIsValid = true;
-    this.cdr.markForCheck();
   }
 
   ngOnDestroy() {

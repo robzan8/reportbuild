@@ -60,16 +60,17 @@ export class ImageContainerComponent extends WidgetComponent {
     switch (this.imageContainer.imageType) {
       case AjfImageType.Image:
         this.imageContainer.urls = {formula};
-        return;
+        break;
       case AjfImageType.Flag:
         this.imageContainer.flags = {formula};
-        return;
+        break;
       case AjfImageType.Icon:
         this.imageContainer.icons = {formula};
-        return;
+        break;
       default:
         throw new Error('unknown image type');
     }
+    this.cdr.markForCheck();
   }
 
   onImageTypeChange(event: Event) {
@@ -79,12 +80,10 @@ export class ImageContainerComponent extends WidgetComponent {
     this.imageContainer.imageType = Number(select.value);
 
     this.setFormula(formula);
-    this.cdr.markForCheck();
   }
 
   onFormulaChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.setFormula(input.value);
-    this.cdr.markForCheck();
   }
 }
