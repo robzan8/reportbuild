@@ -5,6 +5,7 @@ import { ReportBuilderComponent } from '../../report-builder/report-builder.comp
 
 // TODO: editor width should adapt to report
 // TODO: implement undo redo
+// fix:
 // TODO: allow chartType as type
 // TODO: automatically add columns in layout if children are not columns?
 // fix aggregation
@@ -28,7 +29,6 @@ export class WidgetComponent {
   onFocusIn(event: Event) {
     event.stopPropagation();
     this.builder.selectedComponent = this;
-    // TODO: change detect property bar
   }
 
   // TODO: input and area should be components that stop propagation of del/cut/copy/paste

@@ -18,6 +18,7 @@ import { StylesEditorComponent } from './styles-editor/styles-editor.component';
 import { ChartComponent } from './widgets/chart/chart.component';
 import { ObjectEditorComponent } from './object-editor/object-editor.component';
 import { ChartDataComponent } from './widgets/chart-data/chart-data.component';
+import { TextinputComponent } from './textinput/textinput.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ChartDataComponent } from './widgets/chart-data/chart-data.component';
     ImageContainerComponent,
     MapComponent,
     StylesEditorComponent,
-    ObjectEditorComponent
+    ObjectEditorComponent,
+    TextinputComponent
   ],
   imports: [
     BrowserModule

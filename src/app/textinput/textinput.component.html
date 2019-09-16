@@ -1,0 +1,6 @@
+<input type="text" [value]="value" [placeholder]="placeholder" [ngClass]="{monospace: monospace}"
+  (keyup)="onKeyup($event)"
+  (change)="$event.stopPropagation()"
+  (cut)="$event.stopPropagation()"
+  (copy)="$event.stopPropagation()"
+  (paste)="$event.stopPropagation()">

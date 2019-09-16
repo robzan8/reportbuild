@@ -9,8 +9,8 @@
 
   <div class="content">
     <div class="imagecontainer-formula-input">
-      {{ formulaInputLabel() }}<input type="text" [value]="getFormula()"
-        (change)="onFormulaChange($event)">
+      {{ formulaInputLabel() }}<app-textinput [value]="getFormula()"
+        (change)="onFormulaChange($event)" [monospace]="true"></app-textinput>
     </div>
     <img src="assets/image404.png">
   </div>

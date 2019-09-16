@@ -1,4 +1,2 @@
-<div class="table-cell">
-  <input type="text" placeholder="cell label"
-    [value]="cell.label || ''" (change)="onLabelChange($event)">
-</div>
+<app-textinput [value]="cell.label || ''" placeholder="cell label"
+  (change)="onLabelChange($event)"></app-textinput>

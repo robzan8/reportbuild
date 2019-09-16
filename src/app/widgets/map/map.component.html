@@ -6,12 +6,12 @@
 
   <div class="content">
     <div class="map-inputs">
-      <span>coordinate formula: </span><input type="text" [value]="map.coordinate?.formula || ''"
-        (change)="onCoordinateChange($event)">
-      <span>tile layer: </span><input type="text" [value]="map.tileLayer || ''"
-        (change)="onTileLayerChange($event)">
-      <span>attribution: </span><input type="text" [value]="map.attribution || ''"
-        (change)="onAttributionChange($event)">
+      <span>coordinate formula: </span><app-textinput [value]="map.coordinate?.formula || ''"
+        (change)="onCoordinateChange($event)" [monospace]="true"></app-textinput>
+      <span>tile layer: </span><app-textinput [value]="map.tileLayer || ''"
+        (change)="onTileLayerChange($event)" [monospace]="true"></app-textinput>
+      <span>attribution: </span><app-textinput [value]="map.attribution || ''"
+        (change)="onAttributionChange($event)" [monospace]="true"></app-textinput>
     </div>
     <img src="assets/image404.png">
   </div>

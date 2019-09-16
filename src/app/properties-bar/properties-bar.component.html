@@ -5,8 +5,8 @@
   <div class="bar-content" *ngIf="component">
     <ng-container *ngIf="widget.widgetType !== undefined">
       visibility condition:<br>
-      <input type="text" [value]="widget.visibility?.condition || ''"
-        (change)="onVisibilityConditionChange($event)">
+      <app-textinput [value]="widget.visibility?.condition || ''"
+        (change)="onVisibilityConditionChange($event)"></app-textinput>
     </ng-container>
 
     <ng-container [ngSwitch]="component.name">
@@ -37,8 +37,8 @@
       
       <ng-container *ngSwitchCase="'cell'">
         formula:<br>
-        <input type="text" [value]="widget.formula?.formula || ''"
-          (change)="onFormulaChange('formula', $event)"><br>
+        <app-textinput [value]="widget.formula?.formula || ''"
+          (change)="onFormulaChange('formula', $event)"></app-textinput><br>
         aggregation: <select (change)="onAggregationChange($event)" style="margin-top: 7px">
           <option value="0" [selected]="widget.aggregation.aggregation === 0 ? 'selected' : ''">None</option>
           <option value="1" [selected]="widget.aggregation.aggregation === 1 ? 'selected' : ''">Sum</option>

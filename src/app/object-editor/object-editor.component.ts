@@ -37,7 +37,7 @@ export class ObjectEditorComponent implements OnDestroy {
   }
 
   constructor(private cdr: ChangeDetectorRef) {
-    this.sub = this.keyUp.pipe(debounceTime(200)).subscribe(e => {
+    this.sub = this.keyUp.pipe(debounceTime(150)).subscribe(e => {
       this.onObjectChange(e);
     });
   }

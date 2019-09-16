@@ -1,11 +1,4 @@
-app-table-cell {
+app-table-cell, app-table-cell > app-textinput {
     display: block;
     width: 100%;
-}
-
-.table-cell input {
-    width: 100%;
-    border: 2px solid #aeb;
-    border-radius: 2px;
-    outline: none;
 }

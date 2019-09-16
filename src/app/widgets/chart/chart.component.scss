@@ -10,8 +10,7 @@ app-chart {
     align-items: center;
 }
 
-.chart-labels-input > input {
-    font-family: "Lucida Console", Monaco, monospace;
+.chart-labels-input > app-textinput {
     margin-left: 4px;
     width: 60%;
 }
