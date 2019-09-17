@@ -2,5 +2,8 @@
   <span>text</span>
 
   <textarea placeholder="Enter HTML text here"
-    (change)="onTextChange($event)">{{ text.htmlText }}</textarea>
+    (keyup)="onKeyup($event)"
+    (cut)="$event.stopPropagation()"
+    (copy)="$event.stopPropagation()"
+    (paste)="$event.stopPropagation()">{{ text.htmlText }}</textarea>
 </div>
