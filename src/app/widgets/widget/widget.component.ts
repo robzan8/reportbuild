@@ -3,6 +3,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, HostListe
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 
+function jsonStringify(w: AjfWidget): string {
+  return JSON.stringify(w, null, 2);
+}
+
 // TODO: editor width should adapt to report
 // TODO: implement undo redo
 // fix:
@@ -39,7 +43,7 @@ export class WidgetComponent {
       return;
     }
     // TODO: json should be indented
-    event.clipboardData.setData('text/plain', JSON.stringify(this.widget));
+    event.clipboardData.setData('text/plain', jsonStringify(this.widget));
     event.preventDefault();
   }
   // TODO: copy paste of columns should have special handling for column width property.
@@ -50,7 +54,7 @@ export class WidgetComponent {
     if (tag === 'INPUT' || tag === 'TEXTAREA') {
       return;
     }
-    const text = JSON.stringify(this.widget);
+    const text = jsonStringify(this.widget);
     const ok = this.delete();
     if (!ok) {
       return;
