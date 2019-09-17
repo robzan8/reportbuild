@@ -31,8 +31,6 @@ export class WidgetComponent {
     this.builder.selectedComponent = this;
   }
 
-  // TODO: input and area should be components that stop propagation of del/cut/copy/paste
-  // and provide a change event on keyup
   @HostListener('copy', ['$event'])
   onCopy(event: ClipboardEvent) {
     event.stopPropagation();
@@ -53,7 +51,7 @@ export class WidgetComponent {
       return;
     }
     const text = JSON.stringify(this.widget);
-    const ok = this.remove();
+    const ok = this.delete();
     if (!ok) {
       return;
     }
@@ -76,8 +74,17 @@ export class WidgetComponent {
     parentContent.splice(i + 1, 0, w);
     this.parent.markForCheck();
   }
-  // TODO: del keypress should be captured here, not in builder component
-  remove(): boolean {
+
+  @HostListener('keyup.delete', ['$event']) onDelete(event: KeyboardEvent) {
+    event.stopPropagation();
+    const tag = (event.target as HTMLElement).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') {
+      return;
+    }
+    this.delete();
+  }
+
+  delete(): boolean {
     try {
       const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
       const i = parentContent.indexOf(this.widget);
@@ -89,7 +96,6 @@ export class WidgetComponent {
     }
   }
 
-  // TODO: after other todos, review this file for change detection code.
   markForCheck(): void {
     this.cdr.markForCheck();
   }
