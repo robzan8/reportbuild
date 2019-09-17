@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy,
-  Input, EventEmitter, Output } from '@angular/core';
+  Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -11,18 +11,18 @@ import { debounceTime } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextinputComponent {
+export class TextinputComponent implements OnDestroy {
 
   @Input() value = '';
   @Input() placeholder = '';
   @Input() monospace = false;
-  @Output() change = new EventEmitter<Event>();
+  @Output() chchange = new EventEmitter<Event>();
   keyUp = new Subject<Event>();
   private sub: Subscription;
 
   constructor() {
     this.sub = this.keyUp.pipe(debounceTime(150)).subscribe(event => {
-      this.change.emit(event);
+      this.chchange.emit(event);
     });
   }
 

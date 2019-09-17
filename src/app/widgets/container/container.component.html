@@ -2,7 +2,7 @@
   <span>{{ name }}
     <ng-container *ngIf="widget.widgetType === WT.Column">
       - width: <app-textinput style="width: 50px" [value]="columnWidth()"
-        (change)="onColumnWidthChange($event)"></app-textinput>
+        (chchange)="onColumnWidthChange($event)"></app-textinput>
     </ng-container>
   </span>
 

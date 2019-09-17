@@ -9,7 +9,7 @@
   <div class="content">
     <div class="chart-labels-input">
       labels: <app-textinput [value]="getLabelsFormula()"
-        (change)="onLabelsChange($event)" [monospace]="true"></app-textinput>
+        (chchange)="onLabelsChange($event)" [monospace]="true"></app-textinput>
     </div>
     dataset:<br>
     <app-chart-data *ngFor="let data of chart.dataset"

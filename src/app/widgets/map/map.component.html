@@ -7,11 +7,11 @@
   <div class="content">
     <div class="map-inputs">
       <span>coordinate formula: </span><app-textinput [value]="map.coordinate?.formula || ''"
-        (change)="onCoordinateChange($event)" [monospace]="true"></app-textinput>
+        (chchange)="onCoordinateChange($event)" [monospace]="true"></app-textinput>
       <span>tile layer: </span><app-textinput [value]="map.tileLayer || ''"
-        (change)="onTileLayerChange($event)" [monospace]="true"></app-textinput>
+        (chchange)="onTileLayerChange($event)" [monospace]="true"></app-textinput>
       <span>attribution: </span><app-textinput [value]="map.attribution || ''"
-        (change)="onAttributionChange($event)" [monospace]="true"></app-textinput>
+        (chchange)="onAttributionChange($event)" [monospace]="true"></app-textinput>
     </div>
     <img src="assets/image404.png">
   </div>
