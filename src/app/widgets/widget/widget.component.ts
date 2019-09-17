@@ -1,18 +1,18 @@
-import { AjfWidget, AjfWidgetWithContent } from '@ajf/core/reports';
+import { AjfWidget, AjfWidgetWithContent, AjfWidgetType, AjfLayoutWidget } from '@ajf/core/reports';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, HostListener, ViewEncapsulation } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 
-function jsonStringify(w: AjfWidget): string {
+function jsonStringify(c: WidgetComponent): string {
+  let w = c.widget;
+  if (w.widgetType === AjfWidgetType.Column) {
+    const parent = c.parent.widget as AjfLayoutWidget;
+    const i = parent.content.indexOf(w);
+    const flexGrow = parent.columns[i];
+    w = {...w, flexGrow} as any;
+  }
   return JSON.stringify(w, null, 2);
 }
-
-// TODO: editor width should adapt to report
-// TODO: implement undo redo
-// fix:
-// TODO: allow chartType as type
-// TODO: automatically add columns in layout if children are not columns?
-// fix aggregation
 
 // Base class for widgets.
 @Component({
@@ -37,16 +37,15 @@ export class WidgetComponent {
 
   @HostListener('copy', ['$event'])
   onCopy(event: ClipboardEvent) {
+    console.log('oncopy');
     event.stopPropagation();
     const tag = (event.target as HTMLElement).tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA') {
       return;
     }
-    // TODO: json should be indented
-    event.clipboardData.setData('text/plain', jsonStringify(this.widget));
+    event.clipboardData.setData('text/plain', jsonStringify(this));
     event.preventDefault();
   }
-  // TODO: copy paste of columns should have special handling for column width property.
   @HostListener('cut', ['$event'])
   onCut(event: ClipboardEvent) {
     event.stopPropagation();
@@ -54,7 +53,7 @@ export class WidgetComponent {
     if (tag === 'INPUT' || tag === 'TEXTAREA') {
       return;
     }
-    const text = jsonStringify(this.widget);
+    const text = jsonStringify(this);
     const ok = this.delete();
     if (!ok) {
       return;
@@ -73,9 +72,14 @@ export class WidgetComponent {
     event.preventDefault();
     const w = JSON.parse(event.clipboardData.getData('text/plain'));
 
-    const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
-    const i = parentContent.indexOf(this.widget);
-    parentContent.splice(i + 1, 0, w);
+    const parent = this.parent.widget as AjfWidgetWithContent;
+    const i = parent.content.indexOf(this.widget) + 1;
+    if (w.widgetType === AjfWidgetType.Column) {
+      const flexGrow = w.flexGrow || -1;
+      delete w.flexGrow;
+      (parent as AjfLayoutWidget).columns.splice(i, 0, flexGrow);
+    }
+    parent.content.splice(i, 0, w);
     this.parent.markForCheck();
   }
 
@@ -90,9 +94,12 @@ export class WidgetComponent {
 
   delete(): boolean {
     try {
-      const parentContent = (this.parent.widget as AjfWidgetWithContent).content;
-      const i = parentContent.indexOf(this.widget);
-      parentContent.splice(i, 1);
+      const parent = this.parent.widget as AjfWidgetWithContent;
+      const i = parent.content.indexOf(this.widget);
+      parent.content.splice(i, 1);
+      if (parent.widgetType === AjfWidgetType.Layout) {
+        (parent as AjfLayoutWidget).columns.splice(i, 1);
+      }
       this.parent.markForCheck();
       return true;
     } catch (_) {
