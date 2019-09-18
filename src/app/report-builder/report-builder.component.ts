@@ -2,6 +2,7 @@ import { AjfReport } from '@ajf/core/reports';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 
 import { WidgetComponent } from '../widgets/widget/widget.component';
+import { fix } from '../widgets/report.interface';
 
 @Component({
   selector: 'app-report-builder',
@@ -43,6 +44,7 @@ export class ReportBuilderComponent {
         window.alert('Invalid json: ' + ex);
         return;
       }
+      fix(report);
       this.report = report;
       this.cdr.markForCheck();
     };
