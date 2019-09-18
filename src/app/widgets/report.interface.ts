@@ -2,19 +2,16 @@ import { AjfAggregationType, AjfChartDataset, AjfTableDataset } from '@ajf/core/
 
 export function emptyChartData(): AjfChartDataset {
   return {
+    label: '',
     formula: [{formula: ''}],
-    aggregation: {aggregation: 0},
-    label: ''
+    aggregation: {aggregation: AjfAggregationType.None}
   };
 }
 
-export function emptyTableCell(): AjfTableDataset {
+export function emptyTableCell(): Partial<AjfTableDataset> {
   return {
     label: '',
     formula: {formula: ''},
-    aggregation: {aggregation: AjfAggregationType.None},
-    colspan: 1,
-    rowspan: 1,
-    style: {},
+    aggregation: {aggregation: AjfAggregationType.None}
   };
 }
