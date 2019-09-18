@@ -8,7 +8,7 @@ export function emptyChartData(): AjfChartDataset {
   };
 }
 
-export function emptyTableCell(): Partial<AjfTableDataset> {
+export function emptyTableCell(): any {
   return {
     label: '',
     formula: {formula: ''},
