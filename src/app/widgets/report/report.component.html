@@ -1,4 +1,11 @@
-<div class="report-title" tabindex="0">report</div>
+<div class="report-title" tabindex="0">report - editor width:
+  <select (change)="onEditorWidthChange($event)">
+    <option value="100%">100%</option>
+    <option value="150%">150%</option>
+    <option value="200%">200%</option>
+    <option value="300%">300%</option>
+  </select>
+</div>
 
 <div class="content">
   <app-container name="header" [widget]="report.header" [widgetSet]="[0,2,3,9]" tabindex="0">

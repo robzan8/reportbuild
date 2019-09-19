@@ -1,6 +1,6 @@
 app-report {
     display: block;
-    width: 200%;
+    width: 100%;
 }
 
 app-report > .content {
@@ -9,8 +9,7 @@ app-report > .content {
 
 .report-title {
     background-color: #aeb;
-    padding-bottom: 2px;
+    padding: 1px 6px;
     margin-bottom: 4px;
     border-radius: 4px;
-    text-align: center;
 }
