@@ -1,0 +1,12 @@
+app-unknown {
+    display: block;
+    width: 100%;
+}
+
+app-unknown .widget {
+    border-color: #f87 !important;
+}
+
+app-unknown .widget > span {
+    background-color: #f87 !important;
+}

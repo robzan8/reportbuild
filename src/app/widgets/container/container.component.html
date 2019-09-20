@@ -37,6 +37,9 @@
 
         <app-image-container *ngSwitchCase="WT.ImageContainer" name="image container"
           [widget]="child" [parent]="this" tabindex="0"></app-image-container>
+
+        <app-unknown *ngSwitchDefault name="unknown"
+          [widget]="child" [parent]="this" tabindex="0"></app-unknown>
       </ng-container>
     </ng-container>
 

@@ -1,5 +1,6 @@
 import { AjfReport } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
+  ViewEncapsulation, HostListener } from '@angular/core';
 
 import { WidgetComponent } from '../widgets/widget/widget.component';
 import { fix } from '../widgets/report.interface';
@@ -28,6 +29,11 @@ export class ReportBuilderComponent {
   };
 
   constructor(private cdr: ChangeDetectorRef) { }
+
+  @HostListener('change', ['$event'])
+  onChange(event: Event) {
+    console.log('change');
+  }
 
   onLoadJson(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
