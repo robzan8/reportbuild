@@ -1,5 +1,13 @@
 import { AjfAggregationType, AjfChartDataset, AjfReport, AjfWidget, AjfWidgetWithContent, AjfWidgetType } from '@ajf/core/reports';
 
+export function emptyReport(): AjfReport {
+  return {
+    header: {content: [], styles: {}},
+    content: {content: [], styles: {}},
+    footer: {content: [], styles: {}},
+  };
+}
+
 export function emptyChartData(): AjfChartDataset {
   return {
     label: '',
@@ -45,4 +53,12 @@ export function fix(report: AjfReport) {
       break;
     }
   }
+}
+
+export function deepCopy(report: AjfReport): AjfReport {
+  return JSON.parse(JSON.stringify(report));
+}
+
+export function equal(a: AjfReport, b: AjfReport): boolean {
+  return JSON.stringify(a) === JSON.stringify(b);
 }

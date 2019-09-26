@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
   ViewEncapsulation, HostListener } from '@angular/core';
 
 import { WidgetComponent } from '../widgets/widget/widget.component';
-import { fix } from '../widgets/report.interface';
+import { fix, deepCopy, emptyReport, equal } from '../widgets/report.interface';
 
 const historyCapacity = 10;
 
@@ -24,24 +24,23 @@ export class ReportBuilderComponent {
     this.cdr.markForCheck();
   }
 
-  private history: AjfReport[] = [{
-    header: {content: [], styles: {}},
-    content: {content: [], styles: {}},
-    footer: {content: [], styles: {}},
-  }];
+  report = emptyReport();
+  private history = [emptyReport()];
   private historyIndex = 0;
-  get report(): AjfReport {
-    return this.history[this.historyIndex];
-  }
-  set report(r: AjfReport) {
-    this.history[this.historyIndex] = r;
-  }
 
   constructor(private cdr: ChangeDetectorRef) { }
 
-  @HostListener('change', ['$event'])
-  onChange(event: Event) {
-    console.log(this.report);
+  onReportChange() {
+    if (equal(this.report, this.history[this.historyIndex])) { // no real change
+      return;
+    }
+    this.history = this.history.slice(0, this.historyIndex + 1);
+    if (this.history.length === historyCapacity) {
+      this.history = this.history.slice(1);
+      this.historyIndex--;
+    }
+    this.history.push(deepCopy(this.report));
+    this.historyIndex++;
   }
   @HostListener('body:keyup.control.z', ['$event'])
   onUndo(event: Event) {
@@ -49,7 +48,12 @@ export class ReportBuilderComponent {
     if (tag === 'INPUT' || tag === 'TEXTAREA') {
       return;
     }
-    console.log('undo');
+    if (this.historyIndex === 0) {
+      return;
+    }
+    this.historyIndex--;
+    this.report = deepCopy(this.history[this.historyIndex]);
+    this.cdr.markForCheck();
   }
   @HostListener('body:keyup.control.y', ['$event'])
   onRedo(event: Event) {
@@ -57,7 +61,12 @@ export class ReportBuilderComponent {
     if (tag === 'INPUT' || tag === 'TEXTAREA') {
       return;
     }
-    console.log('redo');
+    if (this.historyIndex === this.history.length - 1) {
+      return;
+    }
+    this.historyIndex++;
+    this.report = deepCopy(this.history[this.historyIndex]);
+    this.cdr.markForCheck();
   }
 
   onLoadJson(event: Event) {
