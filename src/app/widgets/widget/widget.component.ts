@@ -37,7 +37,6 @@ export class WidgetComponent {
 
   @HostListener('copy', ['$event'])
   onCopy(event: ClipboardEvent) {
-    console.log('oncopy');
     event.stopPropagation();
     const tag = (event.target as HTMLElement).tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA') {

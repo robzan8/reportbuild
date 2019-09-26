@@ -5,6 +5,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
 import { WidgetComponent } from '../widgets/widget/widget.component';
 import { fix } from '../widgets/report.interface';
 
+const historyCapacity = 10;
+
 @Component({
   selector: 'app-report-builder',
   templateUrl: './report-builder.component.html',
@@ -22,17 +24,40 @@ export class ReportBuilderComponent {
     this.cdr.markForCheck();
   }
 
-  report: AjfReport = {
+  private history: AjfReport[] = [{
     header: {content: [], styles: {}},
     content: {content: [], styles: {}},
     footer: {content: [], styles: {}},
-  };
+  }];
+  private historyIndex = 0;
+  get report(): AjfReport {
+    return this.history[this.historyIndex];
+  }
+  set report(r: AjfReport) {
+    this.history[this.historyIndex] = r;
+  }
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   @HostListener('change', ['$event'])
   onChange(event: Event) {
-    console.log('change');
+    console.log(this.report);
+  }
+  @HostListener('body:keyup.control.z', ['$event'])
+  onUndo(event: Event) {
+    const tag = (event.target as HTMLElement).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') {
+      return;
+    }
+    console.log('undo');
+  }
+  @HostListener('body:keyup.control.y', ['$event'])
+  onRedo(event: Event) {
+    const tag = (event.target as HTMLElement).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') {
+      return;
+    }
+    console.log('redo');
   }
 
   onLoadJson(event: Event) {
