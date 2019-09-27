@@ -16,4 +16,5 @@
     readonly="true">{{ report | json }}</textarea>
 </div>
 
-<app-properties-bar [component]="selectedComponent"></app-properties-bar>
+<app-properties-bar [widget]="selectedWidget" [widgetName]="selectedWidgetName">
+</app-properties-bar>

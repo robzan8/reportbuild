@@ -1,9 +1,8 @@
-import { AjfReport } from '@ajf/core/reports';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
   ViewEncapsulation, HostListener } from '@angular/core';
 
-import { WidgetComponent } from '../widgets/widget/widget.component';
 import { fix, deepCopy, emptyReport, equal } from '../widgets/report.interface';
+import { AjfWidget } from '@ajf/core/reports';
 
 const historyCapacity = 10;
 
@@ -15,7 +14,8 @@ const historyCapacity = 10;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportBuilderComponent {
-  selectedComponent: WidgetComponent;
+  selectedWidget: AjfWidget;
+  selectedWidgetName = 'widget';
 
   private pShowOutput = false;
   get showOutput(): boolean { return this.pShowOutput; }

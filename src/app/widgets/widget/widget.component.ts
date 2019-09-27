@@ -32,7 +32,8 @@ export class WidgetComponent {
   @HostListener('focusin', ['$event'])
   onFocusIn(event: Event) {
     event.stopPropagation();
-    this.builder.selectedComponent = this;
+    this.builder.selectedWidget = this.widget;
+    this.builder.selectedWidgetName = this.name;
   }
 
   @HostListener('copy', ['$event'])

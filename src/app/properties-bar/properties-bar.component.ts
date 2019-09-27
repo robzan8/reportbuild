@@ -1,7 +1,6 @@
-import { AjfTableDataset } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
-
-import { WidgetComponent } from '../widgets/widget/widget.component';
+import { AjfTableDataset, AjfWidget } from '@ajf/core/reports';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
+  Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-properties-bar',
@@ -12,7 +11,9 @@ import { WidgetComponent } from '../widgets/widget/widget.component';
 })
 export class PropertiesBarComponent {
 
-  @Input() component: WidgetComponent;
+  @Input() widget: AjfWidget;
+  @Input() widgetName = 'widget';
+
   private pObjectName = 'options';
   get objectName(): string {
     return this.pObjectName;
@@ -20,10 +21,6 @@ export class PropertiesBarComponent {
   set objectName(n: string) {
     this.pObjectName = n;
     this.cdr.markForCheck();
-  }
-
-  get widget(): any {
-    return this.component.widget;
   }
 
   constructor(private cdr: ChangeDetectorRef) { }
@@ -46,7 +43,7 @@ export class PropertiesBarComponent {
 
   onAggregationChange(event: Event) {
     const aggregation = Number((event.target as HTMLSelectElement).value);
-    (this.widget as AjfTableDataset).aggregation = {aggregation};
+    (this.widget as any as AjfTableDataset).aggregation = {aggregation};
     this.cdr.markForCheck();
   }
 }

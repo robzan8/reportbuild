@@ -1,15 +1,15 @@
 <div class="properties widget">
-  <span>{{ component ? component.name : 'widget' }} properties</span>
+  <span>{{ widgetName }} properties</span>
 
-  <div class="bar-content" *ngIf="!component">No widget selected</div>
-  <div class="bar-content" *ngIf="component">
+  <div class="bar-content" *ngIf="!widget">No widget selected</div>
+  <div class="bar-content" *ngIf="widget">
     <ng-container *ngIf="widget.widgetType !== undefined">
       visibility condition:<br>
       <app-textinput [value]="widget.visibility?.condition || ''"
         (chchange)="onVisibilityConditionChange($event)"></app-textinput>
     </ng-container>
 
-    <ng-container [ngSwitch]="component.name">
+    <ng-container [ngSwitch]="widgetName">
       <ng-container *ngSwitchCase="'chart'">
         <div style="margin-top: 7px">options:</div>
         <app-object-editor [widget]="widget" objectName="options"></app-object-editor>
@@ -51,12 +51,12 @@
 </div>
 
 <div class="styles widget">
-  <span>{{ component ? component.name : 'widget' }} {{ component?.name === 'cell' ? 'style' : 'styles' }}</span>
+  <span>{{ widgetName }} {{ widgetName === 'cell' ? 'style' : 'styles' }}</span>
 
-  <div class="bar-content" *ngIf="!component">No widget selected</div>
-  <div class="bar-content" *ngIf="component">
+  <div class="bar-content" *ngIf="!widget">No widget selected</div>
+  <div class="bar-content" *ngIf="widget">
     <app-styles-editor [widget]="widget"
-      [stylesName]="component.name === 'cell' ? 'style' : 'styles'">
+      [stylesName]="widgetName === 'cell' ? 'style' : 'styles'">
     </app-styles-editor>
   </div>
 </div>
