@@ -61,6 +61,11 @@ export class ContainerComponent extends WidgetComponent {
     this.addWidget(wt);
   }
 
+  addColumn() {
+    this.addWidget(AjfWidgetType.Column);
+    this.builder.onChange();
+  }
+
   addWidget(wt: AjfWidgetType) {
     const container = this.widget as AjfWidgetWithContent;
     if (!container.content) {
