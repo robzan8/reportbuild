@@ -38,19 +38,29 @@ export class ObjectEditorComponent implements OnDestroy {
 
   constructor(private cdr: ChangeDetectorRef) {
     this.sub = this.keyUp.pipe(debounceTime(150)).subscribe(e => {
-      this.onObjectChange(e);
+      this.onKeyup(e);
     });
   }
 
-  deleteObject() {
-    delete this.widget[this.objectName];
-    this.cdr.markForCheck();
+  onKeyup(event: Event) {
+    const text = (event.target as HTMLTextAreaElement).value;
+    if (text === '') {
+      this.jsonIsValid = true;
+      return;
+    }
+    try {
+      JSON.parse(text);
+    } catch (_) {
+      this.jsonIsValid = false;
+      return;
+    }
+    this.jsonIsValid = true;
   }
 
   onObjectChange(event: Event) {
     const text = (event.target as HTMLTextAreaElement).value;
     if (text === '') {
-      this.deleteObject();
+      delete this.widget[this.objectName];
       this.jsonIsValid = true;
       return;
     }

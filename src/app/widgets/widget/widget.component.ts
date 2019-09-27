@@ -34,6 +34,7 @@ export class WidgetComponent {
     event.stopPropagation();
     this.builder.selectedWidget = this.widget;
     this.builder.selectedWidgetName = this.name;
+    this.builder.markForCheck();
   }
 
   @HostListener('copy', ['$event'])
@@ -60,6 +61,8 @@ export class WidgetComponent {
     }
     event.clipboardData.setData('text/plain', text);
     event.preventDefault();
+    this.builder.resetSelection();
+    this.builder.onChange();
   }
 
   @HostListener('paste', ['$event'])
@@ -81,6 +84,7 @@ export class WidgetComponent {
     }
     parent.content.splice(i, 0, w);
     this.parent.markForCheck();
+    this.builder.onChange();
   }
 
   @HostListener('keyup.delete', ['$event']) onDelete(event: KeyboardEvent) {
@@ -90,6 +94,8 @@ export class WidgetComponent {
       return;
     }
     this.delete();
+    this.builder.resetSelection();
+    this.builder.onChange();
   }
 
   delete(): boolean {

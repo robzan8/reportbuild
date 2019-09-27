@@ -15,7 +15,7 @@ const historyCapacity = 10;
 })
 export class ReportBuilderComponent {
   selectedWidget: AjfWidget;
-  selectedWidgetName = 'widget';
+  selectedWidgetName: string;
 
   private pShowOutput = false;
   get showOutput(): boolean { return this.pShowOutput; }
@@ -28,10 +28,18 @@ export class ReportBuilderComponent {
   private history = [emptyReport()];
   private historyIndex = 0;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef) {
+    this.resetSelection();
+  }
 
-  @HostListener('change', ['$event'])
-  onChange(event: Event) {
+  resetSelection() {
+    this.selectedWidget = null;
+    this.selectedWidgetName = 'widget';
+  }
+
+  @HostListener('change', [])
+  onChange() {
+    this.cdr.markForCheck();
     if (equal(this.report, this.history[this.historyIndex])) { // no real change
       return;
     }
@@ -54,6 +62,7 @@ export class ReportBuilderComponent {
     }
     this.historyIndex--;
     this.report = deepCopy(this.history[this.historyIndex]);
+    this.resetSelection();
     this.cdr.markForCheck();
   }
   @HostListener('body:keyup.control.y', ['$event'])
@@ -67,6 +76,7 @@ export class ReportBuilderComponent {
     }
     this.historyIndex++;
     this.report = deepCopy(this.history[this.historyIndex]);
+    this.resetSelection();
     this.cdr.markForCheck();
   }
 
@@ -92,5 +102,9 @@ export class ReportBuilderComponent {
       this.cdr.markForCheck();
     };
     reader.readAsText(file);
+  }
+
+  markForCheck() {
+    this.cdr.markForCheck();
   }
 }
