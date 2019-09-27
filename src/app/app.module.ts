@@ -18,7 +18,6 @@ import { StylesEditorComponent } from './styles-editor/styles-editor.component';
 import { ChartComponent } from './widgets/chart/chart.component';
 import { ObjectEditorComponent } from './object-editor/object-editor.component';
 import { ChartDataComponent } from './widgets/chart-data/chart-data.component';
-import { TextinputComponent } from './textinput/textinput.component';
 import { UnknownComponent } from './widgets/unknown/unknown.component';
 
 @NgModule({
@@ -40,7 +39,6 @@ import { UnknownComponent } from './widgets/unknown/unknown.component';
     MapComponent,
     StylesEditorComponent,
     ObjectEditorComponent,
-    TextinputComponent,
     UnknownComponent
   ],
   imports: [

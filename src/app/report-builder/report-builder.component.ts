@@ -87,6 +87,8 @@ export class ReportBuilderComponent {
       }
       fix(report);
       this.report = report;
+      this.selectedWidget = null;
+      this.selectedWidgetName = 'widget';
       this.cdr.markForCheck();
     };
     reader.readAsText(file);
