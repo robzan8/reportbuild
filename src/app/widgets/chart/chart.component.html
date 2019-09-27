@@ -8,8 +8,8 @@
 
   <div class="content">
     <div class="chart-labels-input">
-      labels: <app-textinput [value]="getLabelsFormula()"
-        (chchange)="onLabelsChange($event)" [monospace]="true"></app-textinput>
+      labels: <input type="text" [value]="getLabelsFormula()"
+        (change)="onLabelsChange($event)" class="monospace">
     </div>
     dataset:<br>
     <app-chart-data *ngFor="let data of chart.dataset"

@@ -1,10 +1,10 @@
 <div class="chart-data">
-  <app-textinput placeholder="data label" style="width: 25%"
-    [value]="data.label || ''" (chchange)="onLabelChange($event)"></app-textinput>
+  <input type="text" placeholder="data label" style="width: 25%"
+    [value]="data.label || ''" (change)="onLabelChange($event)">
   <div style="width: 50%">
-    <app-textinput *ngFor="let f of data.formula; let i = index"
-      placeholder="formula" style="width: 100%" [monospace]="true"
-      [value]="f.formula || ''" (chchange)="onFormulaChange(i, $event)"></app-textinput>
+    <input type="text" *ngFor="let f of data.formula; let i = index"
+      placeholder="formula" style="width: 100%" class="monospace"
+      [value]="f.formula || ''" (change)="onFormulaChange(i, $event)">
   </div>
   <select style="width: 25%" (change)="onAggregationChange($event)">
     <option *ngFor="let name of aggregationTypes; let i = index"

@@ -1,2 +1,2 @@
-<app-textinput [value]="cell.label || ''" placeholder="cell label"
-  (chchange)="onLabelChange($event)"></app-textinput>
+<input type="text" [value]="cell.label || ''" placeholder="cell label"
+  (change)="onLabelChange($event)">

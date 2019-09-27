@@ -1,8 +1,8 @@
 <div class="widget">
   <span>{{ name }}
     <ng-container *ngIf="widget.widgetType === WT.Column">
-      - width: <app-textinput style="width: 50px" [value]="columnWidth()"
-        (chchange)="onColumnWidthChange($event)"></app-textinput>
+      - width: <input type="text" style="width: 50px" [value]="columnWidth()"
+        (change)="onColumnWidthChange($event)">
     </ng-container>
   </span>
 
