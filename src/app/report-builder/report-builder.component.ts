@@ -30,7 +30,8 @@ export class ReportBuilderComponent {
 
   constructor(private cdr: ChangeDetectorRef) { }
 
-  onReportChange() {
+  @HostListener('change', ['$event'])
+  onChange(event: Event) {
     if (equal(this.report, this.history[this.historyIndex])) { // no real change
       return;
     }
