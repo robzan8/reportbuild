@@ -34,7 +34,6 @@ export class WidgetComponent {
     event.stopPropagation();
     this.builder.selectedWidget = this.widget;
     this.builder.selectedWidgetName = this.name;
-    this.builder.markForCheck();
   }
 
   @HostListener('copy', ['$event'])
@@ -83,7 +82,6 @@ export class WidgetComponent {
       (parent as AjfLayoutWidget).columns.splice(i, 0, flexGrow);
     }
     parent.content.splice(i, 0, w);
-    this.parent.markForCheck();
     this.builder.onChange();
   }
 
@@ -106,15 +104,10 @@ export class WidgetComponent {
       if (parent.widgetType === AjfWidgetType.Layout) {
         (parent as AjfLayoutWidget).columns.splice(i, 1);
       }
-      this.parent.markForCheck();
       return true;
     } catch (_) {
       return false;
     }
-  }
-
-  markForCheck(): void {
-    this.cdr.markForCheck();
   }
 
 }

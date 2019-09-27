@@ -23,25 +23,21 @@ export class MapComponent extends WidgetComponent {
   onDisabledChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.map.disabled = input.checked;
-    this.cdr.markForCheck();
   }
 
   onCoordinateChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.map.coordinate = {formula: input.value};
-    this.cdr.markForCheck();
   }
 
   onTileLayerChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.map.tileLayer = input.value;
-    this.cdr.markForCheck();
   }
 
   onAttributionChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.map.attribution = input.value;
-    this.cdr.markForCheck();
   }
 
 }

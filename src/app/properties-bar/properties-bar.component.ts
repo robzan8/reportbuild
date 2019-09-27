@@ -32,18 +32,15 @@ export class PropertiesBarComponent {
     } else {
       this.widget.visibility = {condition: val};
     }
-    this.cdr.markForCheck();
   }
 
   onFormulaChange(propertyName: string, event: Event) {
     const formula = (event.target as HTMLInputElement).value;
     this.widget[propertyName] = {formula};
-    this.cdr.markForCheck();
   }
 
   onAggregationChange(event: Event) {
     const aggregation = Number((event.target as HTMLSelectElement).value);
     (this.widget as any as AjfTableDataset).aggregation = {aggregation};
-    this.cdr.markForCheck();
   }
 }

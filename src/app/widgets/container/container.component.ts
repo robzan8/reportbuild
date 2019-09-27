@@ -49,7 +49,6 @@ export class ContainerComponent extends WidgetComponent {
       width = -1;
     }
     (this.parent.widget as AjfLayoutWidget).columns[this.columnIndex()] = width;
-    this.cdr.markForCheck();
   }
 
   addWidgetClicked(event: Event) {
@@ -103,6 +102,5 @@ export class ContainerComponent extends WidgetComponent {
       break;
     }
     container.content.push(newWidget);
-    this.cdr.markForCheck();
   }
 }

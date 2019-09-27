@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
 import { fix, deepCopy, emptyReport, equal } from '../widgets/report.interface';
 import { AjfWidget } from '@ajf/core/reports';
 
-const historyCapacity = 10;
+const historyCapacity = 11;
 
 @Component({
   selector: 'app-report-builder',
@@ -39,7 +39,9 @@ export class ReportBuilderComponent {
 
   @HostListener('change', [])
   onChange() {
+    // Do it here, to avoid repeating it in each widget's change handler:
     this.cdr.markForCheck();
+
     if (equal(this.report, this.history[this.historyIndex])) { // no real change
       return;
     }
@@ -97,14 +99,10 @@ export class ReportBuilderComponent {
       }
       fix(report);
       this.report = report;
-      this.selectedWidget = null;
-      this.selectedWidgetName = 'widget';
+      this.resetSelection();
       this.cdr.markForCheck();
     };
     reader.readAsText(file);
   }
 
-  markForCheck() {
-    this.cdr.markForCheck();
-  }
 }

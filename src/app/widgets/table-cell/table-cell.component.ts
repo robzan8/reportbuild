@@ -23,7 +23,6 @@ export class TableCellComponent extends WidgetComponent {
   onLabelChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.cell.label = input.value;
-    this.cdr.markForCheck();
   }
 
 }

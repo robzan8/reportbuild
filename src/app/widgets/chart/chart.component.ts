@@ -28,18 +28,16 @@ export class ChartComponent extends WidgetComponent {
   onChartTypeChange(event: Event) {
     const select = event.target as HTMLSelectElement;
     this.chart.chartType = Number(select.value);
-    this.cdr.markForCheck();
   }
 
   onLabelsChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.chart.labels = {formula: input.value};
-    this.cdr.markForCheck();
   }
 
   addData() {
     this.chart.dataset.push(emptyChartData());
-    this.cdr.markForCheck();
+    this.builder.onChange();
   }
 
   // TODO: labels formula could be an array

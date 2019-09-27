@@ -25,11 +25,6 @@ export class StylesEditorComponent {
 
   constructor(private cdr: ChangeDetectorRef) { }
 
-  deleteStyles() {
-    delete this.widget[this.stylesName];
-    this.cdr.markForCheck();
-  }
-
   styleKeys(): string[] {
     return Object.keys(this.styles || {});
   }
@@ -60,7 +55,6 @@ export class StylesEditorComponent {
       this.styles = {};
     }
     this.styles[key] = '';
-    this.cdr.markForCheck();
   }
 
   onStyleKeyChange(oldKey: string, event: Event) {
@@ -70,18 +64,16 @@ export class StylesEditorComponent {
     delete styles[oldKey];
     if (newKey === '') {
       if (this.styleKeys().length === 0) {
-        this.deleteStyles();
+        delete this.widget[this.stylesName];
       }
     } else {
       styles[newKey] = val;
     }
-    this.cdr.markForCheck();
   }
 
   onStyleValChange(key: string, event: Event) {
     const val = (event.target as HTMLInputElement).value;
     this.styles[key] = val;
-    this.cdr.markForCheck();
   }
 
 }

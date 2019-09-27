@@ -65,7 +65,6 @@ export class ImageComponent extends WidgetComponent {
       default:
         throw new Error('unknown image type');
     }
-    this.cdr.markForCheck();
   }
 
   onImageTypeChange(event: Event) {

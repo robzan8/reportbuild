@@ -40,13 +40,13 @@ export class TableComponent extends WidgetComponent {
   addRow() {
     const dataset = this.table.dataset;
     dataset.push(dataset[0].map(_ => emptyTableCell()));
-    this.cdr.markForCheck();
+    this.builder.onChange();
   }
 
   addColumn() {
     for (const row of this.table.dataset) {
       row.push(emptyTableCell());
     }
-    this.cdr.markForCheck();
+    this.builder.onChange();
   }
 }
