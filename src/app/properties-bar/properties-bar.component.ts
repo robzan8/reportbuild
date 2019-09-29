@@ -1,4 +1,4 @@
-import { AjfTableDataset, AjfWidget } from '@ajf/core/reports';
+import { AjfTableDataset } from '@ajf/core/reports';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
   Input, ViewEncapsulation } from '@angular/core';
 
@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
 })
 export class PropertiesBarComponent {
 
-  @Input() widget: AjfWidget;
+  @Input() widget: any;
   @Input() widgetName = 'widget';
 
   private pObjectName = 'options';
