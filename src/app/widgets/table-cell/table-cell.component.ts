@@ -20,9 +20,9 @@ export class TableCellComponent extends WidgetComponent {
     super(builder, cdr);
   }
 
-  onLabelChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.cell.label = input.value;
+  onFormulaChange(event: Event) {
+    const formula = (event.target as HTMLInputElement).value;
+    this.cell.formula = {formula};
   }
 
 }

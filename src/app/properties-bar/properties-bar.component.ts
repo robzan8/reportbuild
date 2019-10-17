@@ -34,9 +34,9 @@ export class PropertiesBarComponent {
     }
   }
 
-  onFormulaChange(propertyName: string, event: Event) {
-    const formula = (event.target as HTMLInputElement).value;
-    this.widget[propertyName] = {formula};
+  onLabelChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.widget.label = input.value;
   }
 
   onAggregationChange(event: Event) {

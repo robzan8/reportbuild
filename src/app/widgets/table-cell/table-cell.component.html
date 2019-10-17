@@ -1,2 +1,2 @@
-<input type="text" [value]="cell.label || ''" placeholder="cell label"
-  (change)="onLabelChange($event)">
+<input type="text" [value]="cell.formula?.formula || ''" placeholder="cell formula"
+  (change)="onFormulaChange($event)">

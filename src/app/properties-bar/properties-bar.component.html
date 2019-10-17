@@ -36,9 +36,8 @@
       </ng-container>
       
       <ng-container *ngSwitchCase="'cell'">
-        formula:<br>
-        <input type="text" [value]="widget.formula?.formula || ''"
-          (change)="onFormulaChange('formula', $event)"><br>
+        label:<br>
+        <input type="text" [value]="widget.label || ''" (change)="onLabelChange($event)"><br>
         aggregation: <select (change)="onAggregationChange($event)" style="margin-top: 7px">
           <option value="0" [selected]="widget.aggregation.aggregation === 0 ? 'selected' : ''">None</option>
           <option value="1" [selected]="widget.aggregation.aggregation === 1 ? 'selected' : ''">Sum</option>
