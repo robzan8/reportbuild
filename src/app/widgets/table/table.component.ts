@@ -38,7 +38,10 @@ export class TableComponent extends WidgetComponent {
   }
 
   addRow() {
-    const newRow = Array(this.numColumns()).map(_ => emptyTableCell());
+    const newRow = [];
+    for (let i = 0; i < this.numColumns(); i++) {
+      newRow.push(emptyTableCell());
+    }
     this.table.dataset.push(newRow);
     this.builder.onChange();
   }
