@@ -4,6 +4,10 @@ import { Component, Input, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+function jsonStringify(object: any): string {
+  return object ? JSON.stringify(object, null, 2) : '';
+}
+
 @Component({
   selector: 'app-object-editor',
   templateUrl: './object-editor.component.html',
@@ -13,7 +17,7 @@ import { debounceTime } from 'rxjs/operators';
 export class ObjectEditorComponent implements OnDestroy {
 
   // used by the view:
-  public object: any;
+  public text: string;
   public jsonIsValid: boolean;
 
   private pWidget: AjfWidget;
@@ -44,7 +48,7 @@ export class ObjectEditorComponent implements OnDestroy {
   }
 
   updateViewState() {
-    this.object = this.widget[this.objectName];
+    this.text = jsonStringify(this.widget[this.objectName]);
     this.jsonIsValid = true;
   }
 
@@ -67,7 +71,7 @@ export class ObjectEditorComponent implements OnDestroy {
     const text = (event.target as HTMLTextAreaElement).value;
     if (text === '') {
       delete this.widget[this.objectName];
-      this.object = undefined;
+      this.text = '';
       this.jsonIsValid = true;
       return;
     }
@@ -79,7 +83,7 @@ export class ObjectEditorComponent implements OnDestroy {
       return;
     }
     this.widget[this.objectName] = o;
-    this.object = o;
+    this.text = jsonStringify(o);
     this.jsonIsValid = true;
   }
 

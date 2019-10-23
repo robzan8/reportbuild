@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ReportBuilderComponent } from './report-builder/report-builder.component';
@@ -40,7 +41,8 @@ import { UnknownComponent } from './widgets/unknown/unknown.component';
     UnknownComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
