@@ -1,5 +1,5 @@
 import { AjfWidget, AjfWidgetWithContent, AjfWidgetType, AjfLayoutWidget } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, HostListener, ViewEncapsulation } from '@angular/core';
+import { Component, Input, HostListener, ViewEncapsulation } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 
@@ -20,14 +20,13 @@ function jsonStringify(c: WidgetComponent): string {
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WidgetComponent {
   @Input() name: string;
   @Input() widget: AjfWidget;
   @Input() parent: WidgetComponent;
 
-  constructor(public builder: ReportBuilderComponent, protected cdr: ChangeDetectorRef) { }
+  constructor(public builder: ReportBuilderComponent) { }
 
   @HostListener('focusin', ['$event'])
   onFocusIn(event: Event) {

@@ -1,5 +1,5 @@
 import { AjfTableDataset } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, Optional } from '@angular/core';
+import { Component, ViewEncapsulation, Optional } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { WidgetComponent } from '../widget/widget.component';
@@ -9,15 +9,14 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './table-cell.component.html',
   styleUrls: ['./table-cell.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableCellComponent extends WidgetComponent {
   get cell(): AjfTableDataset {
     return this.widget as any as AjfTableDataset;
   }
 
-  constructor(@Optional() builder: ReportBuilderComponent, cdr: ChangeDetectorRef) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent) {
+    super(builder);
   }
 
   onFormulaChange(event: Event) {

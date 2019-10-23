@@ -1,6 +1,5 @@
 import { AjfTextWidget } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
-  ViewEncapsulation, Optional } from '@angular/core';
+import { Component, ViewEncapsulation, Optional } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { WidgetComponent } from '../widget/widget.component';
@@ -10,7 +9,6 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextComponent extends WidgetComponent {
 
@@ -18,8 +16,8 @@ export class TextComponent extends WidgetComponent {
     return this.widget as AjfTextWidget;
   }
 
-  constructor(@Optional() builder: ReportBuilderComponent, cdr: ChangeDetectorRef) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent) {
+    super(builder);
   }
 
   onTextChange(event: Event) {

@@ -1,6 +1,6 @@
 import { AjfImageType } from '@ajf/core/image';
 import { AjfWidgetType, AjfLayoutWidget, AjfWidgetWithContent } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Optional, ViewEncapsulation } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { emptyTableCell, emptyChartData } from '../report.interface';
@@ -12,7 +12,6 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContainerComponent extends WidgetComponent {
 
@@ -26,8 +25,8 @@ export class ContainerComponent extends WidgetComponent {
     return this.widget as AjfWidgetWithContent;
   }
 
-  constructor(@Optional() builder: ReportBuilderComponent, cdr: ChangeDetectorRef) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent) {
+    super(builder);
   }
 
   columnIndex(): number {

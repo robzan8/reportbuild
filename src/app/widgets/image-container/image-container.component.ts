@@ -1,7 +1,7 @@
 import { AjfImageType } from '@ajf/core/image';
 import { AjfFormula } from '@ajf/core/models';
 import { AjfImageContainerWidget } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Optional, ViewEncapsulation } from '@angular/core';
+import { Component, Optional, ViewEncapsulation } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { WidgetComponent } from '../widget/widget.component';
@@ -11,7 +11,6 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './image-container.component.html',
   styleUrls: ['./image-container.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageContainerComponent extends WidgetComponent {
 
@@ -22,8 +21,8 @@ export class ImageContainerComponent extends WidgetComponent {
     return this.widget as AjfImageContainerWidget;
   }
 
-  constructor(@Optional() builder: ReportBuilderComponent, cdr: ChangeDetectorRef) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent) {
+    super(builder);
   }
 
   formulaInputLabel(): string {

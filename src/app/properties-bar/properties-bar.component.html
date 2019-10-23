@@ -23,11 +23,7 @@
           <a [ngClass]="{'object-name': true, 'object-name-selected': objectName === 'datalabels'}"
             (click)="objectName = 'datalabels'">data labels</a>:
         </div>
-        <!-- It isn't sufficient to bind to objectName, destroy and recreate the component: -->
-        <app-object-editor *ngIf="objectName === 'options'" objectName="options"
-          [widget]="widget"></app-object-editor>
-        <app-object-editor *ngIf="objectName === 'datalabels'" objectName="datalabels"
-          [widget]="widget"></app-object-editor>
+        <app-object-editor [widget]="widget" [objectName]="objectName"></app-object-editor>
       </ng-container>
 
       <ng-container *ngSwitchCase="'table'">

@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
-  ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, ViewEncapsulation, HostListener } from '@angular/core';
 
 import { fix, deepCopy, emptyReport, equal } from '../widgets/report.interface';
 import { AjfWidget } from '@ajf/core/reports';
@@ -11,7 +10,6 @@ const historyCapacity = 11;
   templateUrl: './report-builder.component.html',
   styleUrls: ['./report-builder.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportBuilderComponent {
   selectedWidget: AjfWidget;
@@ -21,14 +19,13 @@ export class ReportBuilderComponent {
   get showOutput(): boolean { return this.pShowOutput; }
   set showOutput(showOutput: boolean) {
     this.pShowOutput = showOutput;
-    this.cdr.markForCheck();
   }
 
   report = emptyReport();
   private history = [emptyReport()];
   private historyIndex = 0;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor() {
     this.resetSelection();
   }
 
@@ -39,9 +36,6 @@ export class ReportBuilderComponent {
 
   @HostListener('change', [])
   onChange() {
-    // Do it here, to avoid repeating it in each widget's change handler:
-    this.cdr.markForCheck();
-
     if (equal(this.report, this.history[this.historyIndex])) { // no real change
       return;
     }
@@ -65,7 +59,6 @@ export class ReportBuilderComponent {
     this.historyIndex--;
     this.report = deepCopy(this.history[this.historyIndex]);
     this.resetSelection();
-    this.cdr.markForCheck();
   }
   @HostListener('body:keyup.control.y', ['$event'])
   onRedo(event: Event) {
@@ -79,7 +72,6 @@ export class ReportBuilderComponent {
     this.historyIndex++;
     this.report = deepCopy(this.history[this.historyIndex]);
     this.resetSelection();
-    this.cdr.markForCheck();
   }
 
   onLoadJson(event: Event) {
@@ -100,7 +92,6 @@ export class ReportBuilderComponent {
       fix(report);
       this.report = report;
       this.resetSelection();
-      this.cdr.markForCheck();
     };
     reader.readAsText(file);
   }

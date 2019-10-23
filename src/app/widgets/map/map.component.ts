@@ -1,5 +1,5 @@
 import { AjfMapWidget } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, Optional } from '@angular/core';
+import { Component, ViewEncapsulation, Optional } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { WidgetComponent } from '../widget/widget.component';
@@ -9,15 +9,14 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent extends WidgetComponent {
   get map(): AjfMapWidget {
     return this.widget as AjfMapWidget;
   }
 
-  constructor(@Optional() builder: ReportBuilderComponent, cdr: ChangeDetectorRef) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent) {
+    super(builder);
   }
 
   onDisabledChange(event: Event) {

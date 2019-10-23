@@ -1,5 +1,5 @@
 import { AjfWidget } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnDestroy } from '@angular/core';
 
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -9,37 +9,43 @@ import { debounceTime } from 'rxjs/operators';
   templateUrl: './object-editor.component.html',
   styleUrls: ['./object-editor.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ObjectEditorComponent implements OnDestroy {
 
+  // used by the view:
+  public object: any;
+  public jsonIsValid: boolean;
+
+  private pWidget: AjfWidget;
+  @Input() set widget(w: AjfWidget) {
+    this.pWidget = w;
+    if (this.pObjectName) {
+      this.updateViewState();
+    }
+  }
+  get widget() { return this.pWidget; }
+
+  private pObjectName: string;
+  @Input() set objectName(name: string) {
+    this.pObjectName = name;
+    if (this.pWidget) {
+      this.updateViewState();
+    }
+  }
+  get objectName() { return this.pObjectName; }
+
   keyUp = new Subject<KeyboardEvent>();
   private sub: Subscription;
-  private pJsonIsValid = true;
 
-  @Input() widget: AjfWidget;
-  @Input() objectName: string;
-
-  get object() {
-    return this.widget[this.objectName];
-  }
-  set object(o: any) {
-    this.widget[this.objectName] = o;
-    this.cdr.markForCheck();
-  }
-
-  get jsonIsValid(): boolean {
-    return this.pJsonIsValid;
-  }
-  set jsonIsValid(v: boolean) {
-    this.pJsonIsValid = v;
-    this.cdr.markForCheck();
-  }
-
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor() {
     this.sub = this.keyUp.pipe(debounceTime(150)).subscribe(e => {
       this.onKeyup(e);
     });
+  }
+
+  updateViewState() {
+    this.object = this.widget[this.objectName];
+    this.jsonIsValid = true;
   }
 
   onKeyup(event: Event) {
@@ -61,6 +67,7 @@ export class ObjectEditorComponent implements OnDestroy {
     const text = (event.target as HTMLTextAreaElement).value;
     if (text === '') {
       delete this.widget[this.objectName];
+      this.object = undefined;
       this.jsonIsValid = true;
       return;
     }
@@ -71,6 +78,7 @@ export class ObjectEditorComponent implements OnDestroy {
       this.jsonIsValid = false;
       return;
     }
+    this.widget[this.objectName] = o;
     this.object = o;
     this.jsonIsValid = true;
   }

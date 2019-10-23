@@ -1,5 +1,5 @@
 import { AjfChartDataset } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, Optional } from '@angular/core';
+import { Component, ViewEncapsulation, Optional } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { WidgetComponent } from '../widget/widget.component';
@@ -9,7 +9,6 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './chart-data.component.html',
   styleUrls: ['./chart-data.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartDataComponent extends WidgetComponent {
 
@@ -19,8 +18,8 @@ export class ChartDataComponent extends WidgetComponent {
     return this.widget as any as AjfChartDataset;
   }
 
-  constructor(@Optional() builder: ReportBuilderComponent, cdr: ChangeDetectorRef) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent) {
+    super(builder);
   }
 
   onLabelChange(event: Event) {

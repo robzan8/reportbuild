@@ -1,6 +1,6 @@
 import { AjfFormula } from '@ajf/core/models';
 import { AjfChartWidget } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, Optional } from '@angular/core';
+import { Component, ViewEncapsulation, Optional } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { emptyChartData } from '../report.interface';
@@ -11,7 +11,6 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartComponent extends WidgetComponent {
 
@@ -21,8 +20,8 @@ export class ChartComponent extends WidgetComponent {
     return this.widget as AjfChartWidget;
   }
 
-  constructor(@Optional() builder: ReportBuilderComponent, cdr: ChangeDetectorRef) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent) {
+    super(builder);
   }
 
   onChartTypeChange(event: Event) {

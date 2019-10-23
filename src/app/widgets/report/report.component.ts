@@ -1,6 +1,5 @@
 import { AjfReport } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
-  Optional, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, Optional, ViewEncapsulation, ElementRef } from '@angular/core';
 
 import { ReportBuilderComponent } from '../../report-builder/report-builder.component';
 import { WidgetComponent } from '../widget/widget.component';
@@ -10,7 +9,6 @@ import { WidgetComponent } from '../widget/widget.component';
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportComponent extends WidgetComponent {
 
@@ -18,12 +16,8 @@ export class ReportComponent extends WidgetComponent {
     return this.widget as AjfReport;
   }
 
-  constructor(
-    @Optional() builder: ReportBuilderComponent,
-    cdr: ChangeDetectorRef,
-    private element: ElementRef
-  ) {
-    super(builder, cdr);
+  constructor(@Optional() builder: ReportBuilderComponent, private element: ElementRef) {
+    super(builder);
   }
 
   onEditorWidthChange(event: Event) {

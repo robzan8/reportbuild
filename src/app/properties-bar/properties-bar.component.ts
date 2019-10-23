@@ -1,13 +1,11 @@
 import { AjfTableDataset } from '@ajf/core/reports';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
-  Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-properties-bar',
   templateUrl: './properties-bar.component.html',
   styleUrls: ['./properties-bar.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertiesBarComponent {
 
@@ -20,10 +18,9 @@ export class PropertiesBarComponent {
   }
   set objectName(n: string) {
     this.pObjectName = n;
-    this.cdr.markForCheck();
   }
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor() { }
 
   onVisibilityConditionChange(event: Event) {
     const val = (event.target as HTMLInputElement).value;
