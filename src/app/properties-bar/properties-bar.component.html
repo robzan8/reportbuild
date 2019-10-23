@@ -32,7 +32,7 @@
 
       <ng-container *ngSwitchCase="'table'">
         <div style="margin-top: 7px">cell styles:</div>
-        <app-styles-editor [widget]="widget" stylesName="cellStyles"></app-styles-editor>
+        <app-object-editor [widget]="widget" objectName="cellStyles"></app-object-editor>
       </ng-container>
       
       <ng-container *ngSwitchCase="'cell'">
@@ -54,8 +54,8 @@
 
   <div class="bar-content" *ngIf="!widget">No widget selected</div>
   <div class="bar-content" *ngIf="widget">
-    <app-styles-editor [widget]="widget"
-      [stylesName]="widgetName === 'cell' ? 'style' : 'styles'">
-    </app-styles-editor>
+    <app-object-editor [widget]="widget"
+      [objectName]="widgetName === 'cell' ? 'style' : 'styles'">
+    </app-object-editor>
   </div>
 </div>
