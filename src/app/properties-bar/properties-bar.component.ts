@@ -12,13 +12,7 @@ export class PropertiesBarComponent {
   @Input() widget: any;
   @Input() widgetName = 'widget';
 
-  private pObjectName = 'options';
-  get objectName(): string {
-    return this.pObjectName;
-  }
-  set objectName(n: string) {
-    this.pObjectName = n;
-  }
+  public objectName = 'options';
 
   constructor() { }
 

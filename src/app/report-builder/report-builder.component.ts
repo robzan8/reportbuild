@@ -15,11 +15,7 @@ export class ReportBuilderComponent {
   selectedWidget: AjfWidget;
   selectedWidgetName: string;
 
-  private pShowOutput = false;
-  get showOutput(): boolean { return this.pShowOutput; }
-  set showOutput(showOutput: boolean) {
-    this.pShowOutput = showOutput;
-  }
+  public showOutput = false;
 
   report = emptyReport();
   private history = [emptyReport()];
