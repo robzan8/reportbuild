@@ -34,6 +34,10 @@ export class ReportBuilderComponent {
     this.selectedWidgetName = 'widget';
   }
 
+  @HostListener('body:keyup.esc', [])
+  onEsc() {
+    this.showOutput = false;
+  }
   @HostListener('change', [])
   onChange() {
     if (equal(this.report, this.history[this.historyIndex])) { // no real change
