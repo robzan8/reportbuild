@@ -2,5 +2,5 @@
   <span>text</span>
 
   <textarea placeholder="Enter HTML text here"
-    (change)="onTextChange($event)">{{ text.htmlText }}</textarea>
+    (change)="onTextChange($event)" [ngModel]="text.htmlText"></textarea>
 </div>
