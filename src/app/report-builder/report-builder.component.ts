@@ -3,7 +3,7 @@ import { Component, ViewEncapsulation, HostListener } from '@angular/core';
 import { fix, deepCopy, emptyReport, equal } from '../widgets/report.interface';
 import { AjfWidget } from '@ajf/core/reports';
 
-const historyCapacity = 11;
+const historyCapacity = 11; // allows doing undo 10 times
 
 @Component({
   selector: 'app-report-builder',
