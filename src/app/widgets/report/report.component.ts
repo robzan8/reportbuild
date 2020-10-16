@@ -24,4 +24,12 @@ export class ReportComponent extends WidgetComponent {
     const val = (event.target as HTMLSelectElement).value;
     this.element.nativeElement.style.width = val;
   }
+
+  addVariable() {
+    if (this.report.variables == null) {
+      this.report.variables = [];
+    }
+    this.report.variables.push({name: '', formula: {formula: ''}});
+    this.builder.onChange();
+  }
 }

@@ -18,7 +18,7 @@
   },
   "private": true,
   "dependencies": {
-    "@ajf/core": "https://github.com/gnucoop/ajf-core-builds#b4bca02eacb6f66210b2d6ea2558e15736924f4c",
+    "@ajf/core": "~8.5.3",
     "@angular/animations": "~8.2.3",
     "@angular/common": "~8.2.3",
     "@angular/compiler": "~8.2.3",

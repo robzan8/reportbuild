@@ -3,13 +3,12 @@ app-report {
     width: 100%;
 }
 
-app-report > .content {
-    padding: 0;
-}
-
-.report-title {
-    background-color: #aeb;
-    padding: 1px 6px;
-    margin-bottom: 4px;
-    border-radius: 4px;
+.add-var-button {
+    width: 100px;
+    padding: 2px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #eee;
+	border: 1px dashed #aaa;
+	border-radius: 4px;
 }

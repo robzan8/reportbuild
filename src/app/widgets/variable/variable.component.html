@@ -1,0 +1,6 @@
+<div class="variable">
+  <input type="text" placeholder="name" style="width: 25%" class="monospace"
+    [value]="variable.name || ''" (change)="onNameChange($event)">
+  <input type="text" placeholder="formula" style="width: 75%" class="monospace"
+    [value]="variable.formula.formula || ''" (change)="onFormulaChange($event)">
+</div>

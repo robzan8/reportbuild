@@ -19,6 +19,7 @@ import { ChartComponent } from './widgets/chart/chart.component';
 import { ObjectEditorComponent } from './object-editor/object-editor.component';
 import { ChartDataComponent } from './widgets/chart-data/chart-data.component';
 import { UnknownComponent } from './widgets/unknown/unknown.component';
+import { VariableComponent } from './widgets/variable/variable.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UnknownComponent } from './widgets/unknown/unknown.component';
     ImageContainerComponent,
     MapComponent,
     ObjectEditorComponent,
-    UnknownComponent
+    UnknownComponent,
+    VariableComponent,
   ],
   imports: [
     BrowserModule,

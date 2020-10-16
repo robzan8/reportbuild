@@ -1,17 +1,26 @@
-<div class="report-title" tabindex="0">report - editor width:
-  <select (change)="onEditorWidthChange($event)">
-    <option value="100%">100%</option>
-    <option value="150%">150%</option>
-    <option value="200%">200%</option>
-    <option value="300%">300%</option>
-  </select>
-</div>
+<div class="widget">
+  <span>report - editor width:
+    <select (change)="onEditorWidthChange($event)">
+      <option value="100%">100%</option>
+      <option value="150%">150%</option>
+      <option value="200%">200%</option>
+      <option value="300%">300%</option>
+    </select>
+  </span>
 
-<div class="content">
-  <app-container name="header" [widget]="report.header" [widgetSet]="[0,2,3,9]" tabindex="0">
-  </app-container>
-  <app-container name="content" [widget]="report.content" [widgetSet]="[0,1,2,3,4,5,6,9]" tabindex="0">
-  </app-container>
-  <app-container name="footer" [widget]="report.footer" [widgetSet]="[0,2,3,9]" tabindex="0">
-  </app-container>
+  <div class="content">
+    <span style="margin-bottom: 5px">variables:</span>
+    <app-variable *ngFor="let v of report.variables" [variable]="v"></app-variable>
+
+    <div class="add-widget-button">
+      <a class="add-var-button" (click)="addVariable()">add variable</a>
+    </div>
+
+    <app-container name="header" [widget]="report.header" [widgetSet]="[0,2,3,9]" tabindex="0">
+    </app-container>
+    <app-container name="content" [widget]="report.content" [widgetSet]="[0,1,2,3,4,5,6,9]" tabindex="0">
+    </app-container>
+    <app-container name="footer" [widget]="report.footer" [widgetSet]="[0,2,3,9]" tabindex="0">
+    </app-container>
+  </div>
 </div>
